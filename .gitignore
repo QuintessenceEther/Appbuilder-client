@@ -1,0 +1,15 @@
+# Mac
+.DS_Store
+__pycache__/
+
+# Python
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# Temp
+.*~
+~$*
