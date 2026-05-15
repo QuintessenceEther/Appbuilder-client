@@ -17,6 +17,23 @@ conda activate Quant
 - 禁止使用 Python 3.9+ 的类型注解（如 `list[str]`、`dict[str, Any]`），必须用 `typing` 模块：`List[str]`、`Dict[str, Any]`
 - 唯一外部依赖为 `requests`，已安装
 
+## Git 工作流
+
+**⚠️ 内网代理环境下 `git push` 不兼容 GitHub HTTP/2，推送必须用 `push.py`。**
+
+```bash
+# 普通 git 操作（add、commit、diff 等）正常使用
+git add appbuilder_client.py
+git commit -m "fix: 修复某个问题"
+
+# 推送必须用 push.py
+python3 push.py -c                                # 推送有变更的文件
+python3 push.py -m "fix: xxx" appbuilder_client.py  # 推送指定文件
+python3 push.py -a                                # 推送所有文件
+```
+
+> `push.py` 包含 GitHub token，已加入 `.gitignore`，不要提交到仓库。
+
 ## 项目文件结构
 
 | 文件 | 用途 |
@@ -25,6 +42,7 @@ conda activate Quant
 | `appbuilder_client.py` | Python 封装客户端，智能体开发的唯一入口 |
 | `demo_route1_app.py` | 路线一 demo：直接调已建应用（仅需 API Key） |
 | `demo_route2_custom.py` | 路线二 demo：自定义流程编排（需 API Key + AK/SK） |
+| `push.py` | GitHub 推送辅助脚本（内网代理兼容） |
 | `AB_API_3_1.docx` | 原始 Word 接口文档（源文件，勿删） |
 
 ## 核心架构：`appbuilder_client.py`
